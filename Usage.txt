@@ -1,0 +1,21 @@
+basicmath_small > output_small.txt
+bitcnts 75000 > output_small.txt
+
+jpeg-6a/cjpeg -dct int -progressive -opt -outfile output_small_encode.jpeg input_small.ppm
+jpeg-6a/djpeg -dct int -ppm -outfile output_small_decode.ppm input_small.jpg
+
+dijkstra_large input.dat > output_large.dat
+
+patricia small.udp > output_small.txt
+
+search_large > output_large.txt
+
+sha input_small.asc > output_small.txt
+
+bin/rawcaudio < data/small.pcm > output_small.adpcm
+bin/rawdaudio < data/small.adpcm > output_small.pcm
+
+crc ../adpcm/data/large.pcm > output_small.txt
+
+fft 8 32768 > output_large.txt
+fft 8 32768 -i > output_large.inv.txt
