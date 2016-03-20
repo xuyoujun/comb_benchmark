@@ -2,7 +2,7 @@
 
 #include "adpcm.h"
 #include <stdio.h>
-
+#include <fcntl.h>
 struct adpcm_state state;
 
 #define NSAMPLES 1000
@@ -12,9 +12,9 @@ short	sbuf[NSAMPLES];
 
 int rawcaudio_main(void *p) {
     int n;
-
+    int fd = open("large.pcm", O_RDONLY);
     while(1) {
-	n = read(0, sbuf, NSAMPLES*2);
+	n = read(fd, sbuf, NSAMPLES*2);
 	if ( n < 0 ) {
 	    perror("input file");
 	    exit(1);

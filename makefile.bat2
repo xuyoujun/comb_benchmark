@@ -56,25 +56,21 @@ LDFLAGS:= -static -Wl,--script=/home/sesc/sescutils/src/mint.x\
 #									$(SPLASH2DIR)/codes/apps/fmm/*.o\
 #									-L/home/sesc/sesc-build-test2/obj/mipseb_obj
 #LIBS   := -lrt  -lm  -lpthread  
-app = combina_1
 LIBS   := -lm -lapp 
+ifeq ($(ver),small)
+target = launcher_small
+else
+target = launcher_large
+endif
 
-combina_1:combina_1.c
+all:$(target)
+$(target): $(target).o
+	$(CC) $(LDFLAGS) $<  -o $@ $(LIBS)
+	cp $(target) /home/sesc/sesc-build-test2/
+
+$(target).o: $(target).c
 	$(CC) -O2 -c $< $(CFLAGS) 
-#	echo $$(subst %.c,%.o,combina_01.c)
-	$(CC) $(LDFLAGS) combina_1.o  -o $@ $(LIBS)
-	cp combina_1 /home/sesc/sesc-build-test2/
-
-
-
-gensh:gensh.c
-	gcc $< -o $@
-	./gensh
-	chmod u+x run_combina.sh
-testdfs_12:testdfs_12.c
-	gcc $< -o $@
-	cp testdfs_12 ./testfds2
 clean:
-		-@rm -f $(app)
+		-@rm -f launcher 
 		-@rm -f *.o
 

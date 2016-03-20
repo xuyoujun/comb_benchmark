@@ -4,18 +4,19 @@ LD = mipseb-linux-gcc
 BENCHDIR=/home/sesc/Desktop
 #CFLAGS := -g -O2  -march=armv5 -mfp=vfp3
 
-CFLAGS :=  -mips2 -mabi=32 -static -Wa,-non_shared -mno-abicalls
+CFLAGS :=  -mips2 -mabi=32 -static -Wa,-non_shared -mno-abicalls  -I /home/sesc/sesc/src/libapp/
 LDFLAGS:= -static -Wl,--script=/home/sesc/sescutils/src/mint.x\
 									$(BENCHDIR)/automotive/basicmath/*.o\
-#									$(BENCHDIR)/automotive/bitcount/*.o\
-#									$(BENCHDIR)/CINT2000/181.mcf/src/*.o\
-#									$(BENCHDIR)/CINT2000/197.parser/src/*.o\
-#									$(BENCHDIR)/CINT2000/254.gap/src/*.o\
-#									$(BENCHDIR)/CINT2000/255.vortex/src/*.o\
-#									$(BENCHDIR)/CINT2000/300.twolf/src/*.o\
-#									$(BENCHDIR)/CFP2000/171.swim/src/*.o\
-#									$(BENCHDIR)/CFP2000/168.wupwise/src/*.o\
-#									$(BENCHDIR)/CFP2000/172.mgrid/src/*.o\
+									$(BENCHDIR)/automotive/bitcount/*.o\
+									$(BENCHDIR)/consumer/jpeg/jpeg-6a/*.o\
+									$(BENCHDIR)/network/dijkstra/*.o\
+									$(BENCHDIR)/network/patricia/*.o\
+									$(BENCHDIR)/telecomm/adpcm/src/*.o\
+									$(BENCHDIR)/telecomm/CRC32/*.o\
+									$(BENCHDIR)/telecomm/FFT/*.o\
+									$(BENCHDIR)/office/stringsearch/*.o\
+									$(BENCHDIR)/security/sha/*.o\
+									-L/home/sesc/sesc-build-test2/obj/mipseb_obj/
 #									$(BENCHDIR)/CFP2000/173.applu/src/*.o\
 #									$(BENCHDIR)/CFP2000/177.mesa/src/*.o\
 #									$(BENCHDIR)/CFP2000/179.art/src/*.o\
@@ -53,21 +54,24 @@ LDFLAGS:= -static -Wl,--script=/home/sesc/sescutils/src/mint.x\
 #									$(SPLASH2DIR)/codes/kernels/fft/*.o\
 #									$(SPLASH2DIR)/codes/kernels/radix/*.o\
 #									$(SPLASH2DIR)/codes/apps/fmm/*.o\
-#									-L$(ARMCUDALIB)/include  
-LIBS   := -lrt  -lm  -lpthread  
-
-
-
-all: launcher 
-
-launcher: launcher2.o
-	$(CC) $(LDFLAGS) $< $(LIBS) -o $@
-	cp launcher ~/sesc-build-test2
-
-launcher.o: launcher2.c
+#									-L/home/sesc/sesc-build-test2/obj/mipseb_obj
+#LIBS   := -lrt  -lm  -lpthread  
+SRC_PATH = .
+SRCS = $(wildcard ${SRC_PATH}/*.c)
+OBJS = $(subst .c,.o,${SRCS})
+TARGET = $((subst .o,,$(OBJS))
+LIBS   := -lm -lapp
+all:${OBJS}
+$(OBJS):%.o:%.c
 	$(CC) -O2 -c $< $(CFLAGS) 
+#	echo $(subst .c,.o,$(testsub))
+	echo $*
+	$(CC) $(LDFLAGS) $@  -o $* $(LIBS)
+#	cp combina_15 /home/sesc/sesc-build-test2/
 
 clean:
-		-@rm -f launcher 
+		-@rm -f $(SRCS)
 		-@rm -f *.o
+		-@rm -f combina_*
+
 

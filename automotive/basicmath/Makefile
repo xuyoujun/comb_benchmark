@@ -1,5 +1,5 @@
 #FILE1 =  rad2deg.c  cubic.c   isqrt.c
-FILE = basicmath_large.c   rad2deg.c  cubic.c   isqrt.c 
+FILE = basicmath_small.c   rad2deg.c  cubic.c   isqrt.c 
 CC=mipseb-linux-gcc
 
 #all: basicmath_small basicmath_large
