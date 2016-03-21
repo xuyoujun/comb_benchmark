@@ -68,7 +68,14 @@ thread_args[i]->argv[7] = (char *)malloc(20 *sizeof(char));
 memcpy(thread_args[i]->argv[7],"input_large.ppm",20); 
 
 
- i =  3 ;
+i =  3 ;
+thread_args[i]->argc = 2;
+thread_args[i]->argv = (char **)malloc(2*sizeof(char *));
+thread_args[i]->argv[0] = (char *)malloc(20 *sizeof(char));
+memcpy(thread_args[i]->argv[0],"dijkstra_large_mian",20); 
+thread_args[i]->argv[1] = (char *)malloc(20 *sizeof(char));
+memcpy(thread_args[i]->argv[1],"input.dat",20); 
+ i =  4 ;
 thread_args[i]->argc = 7;
 thread_args[i]->argv = (char **)malloc(7*sizeof(char *));
 thread_args[i]->argv[0] = (char *)malloc(20 *sizeof(char));
@@ -87,22 +94,15 @@ thread_args[i]->argv[6] = (char *)malloc(20 *sizeof(char));
 memcpy(thread_args[i]->argv[6],"input_large.jpg",20); 
 
 
-i =  4 ;
+
+
+ i =  5 ;
 thread_args[i]->argc = 2;
 thread_args[i]->argv = (char **)malloc(2*sizeof(char *));
 thread_args[i]->argv[0] = (char *)malloc(20 *sizeof(char));
-memcpy(thread_args[i]->argv[0],"dijkstra_large_mian",20); 
+memcpy(thread_args[i]->argv[0],"patricia_mian",20); 
 thread_args[i]->argv[1] = (char *)malloc(20 *sizeof(char));
-memcpy(thread_args[i]->argv[1],"input.dat",20); 
-
-
-// i =  5 ;
-//thread_args[i]->argc = 2;
-//thread_args[i]->argv = (char **)malloc(2*sizeof(char *));
-//thread_args[i]->argv[0] = (char *)malloc(20 *sizeof(char));
-//memcpy(thread_args[i]->argv[0],"patricia_mian",20); 
-//thread_args[i]->argv[1] = (char *)malloc(20 *sizeof(char));
-//memcpy(thread_args[i]->argv[1],"large.udp",20); 
+memcpy(thread_args[i]->argv[1],"large.udp",20); 
 
 
 // i =  6 ;
@@ -129,12 +129,12 @@ sesc_spawn((void*)bitcount_main,(void *)thread_args[i],SESC_FLAG_MAP| i + 1);
 
  i =  2 ;
 sesc_spawn((void*)cjpeg_main,(void *)thread_args[i],SESC_FLAG_MAP| i + 1);
-
  i =  3 ;
+sesc_spawn((void*)dijkstra_large_main,(void *)thread_args[i],SESC_FLAG_MAP| i + 1);
+
+ i =  4 ;
 sesc_spawn((void*)djpeg_main,(void *)thread_args[i],SESC_FLAG_MAP| i + 1);
 
-// i =  4 ;
-//sesc_spawn((void*)dijkstra_large_main,(void *)thread_args[i],SESC_FLAG_MAP| i + 1);
 
 // i =  5 ;
 //sesc_spawn((void*)patricia_main,(void *)thread_args[i],SESC_FLAG_MAP| i + 1);

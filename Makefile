@@ -74,6 +74,9 @@ gensh:gensh.c
 testdfs_12:testdfs_12.c
 	gcc $< -o $@
 	cp testdfs_12 ./testfds2
+testdfs_11:testdfs_11.c
+	gcc $< -o $@
+	cp testdfs_11 ./testfds2
 clean:
 		-@rm -f $(app)
 		-@rm -f *.o
