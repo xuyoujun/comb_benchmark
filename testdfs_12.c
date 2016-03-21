@@ -7,18 +7,18 @@ char name[32];
 //int k;
 char *headPragram;
 char *funcdeclare[12] = {
+"int rawcaudio_main(void *);",
+"int rawdaudio_main(void *);",
+"int sha_main(void *);",
 "int basicmath_main(void *);",
-"int bitcount_main(void *);",
+"int fft_main(void *);",
+"int fft_main(void *);",
+"int CRC32_main(void *);",
+"int patricia_main(void *);",
 "int cjpeg_main(void *);",
 "int djpeg_main(void *);",
+"int bitcount_main(void *);",
 "int dijkstra_large_main(void *);",
-"int patricia_main(void *);",
-"int sha_main(void *);",
-"int rawdaudio_main(void *);",
-"int rawcaudio_main(void *);",
-"int CRC32_main(void *);",
-"int fft_main(void *);",
-"int fft_main(void *);",
 };
 
 char *main_head ;
@@ -151,7 +151,7 @@ memcpy(thread_args[i]->argv[6],\"input_large.jpg\",15); \n\
 thread_args[i]->argv = (char **)malloc(2*sizeof(char *));\n\
 thread_args[i]->argv[0] = (char *)malloc(20 *sizeof(char));\n\
 memset(thread_args[i]->argv[0],0,20);\n\
-memcpy(thread_args[i]->argv[0],\"dijkstra_large_mian\",19); \n\
+memcpy(thread_args[i]->argv[0],\"dijkstra_mian\",19); \n\
 thread_args[i]->argv[1] = (char *)malloc(20 *sizeof(char));\n\
 memset(thread_args[i]->argv[1],0,20);\n\
 memcpy(thread_args[i]->argv[1],\"input.dat\",9); \n\
@@ -197,7 +197,7 @@ void dfs(char **A,int B[],int C[],int counter ,int start, int end){
 		FILE *fd = fopen(name,"w");
 //		printf("%s\n",name);
 		fprintf(fd,"\n%s\n",headPragram);
-		for(i = 0; i < 11; i++){
+		for(i = 0; i < 12; i++){
 			fprintf(fd,"\n%s",funcdeclare[i]);
 		}
 		fprintf(fd,"\n%s\n",main_head);

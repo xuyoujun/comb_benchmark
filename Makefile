@@ -64,6 +64,12 @@ combina_1:combina_1.c
 #	echo $$(subst %.c,%.o,combina_01.c)
 	$(CC) $(LDFLAGS) combina_1.o  -o $@ $(LIBS)
 	cp combina_1 /home/sesc/sesc-build-test2/
+combina_1_1:combina_1_1.c
+	$(CC) -O2 -c $< $(CFLAGS) 
+#	echo $$(subst %.c,%.o,combina_01.c)
+	$(CC) $(LDFLAGS) combina_1_1.o  -o $@ $(LIBS)
+	cp combina_1_1 /home/sesc/sesc-build-test2/
+
 
 
 
