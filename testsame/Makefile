@@ -56,44 +56,22 @@ LDFLAGS:= -static -Wl,--script=/home/sesc/sescutils/src/mint.x\
 #									$(SPLASH2DIR)/codes/apps/fmm/*.o\
 #									-L/home/sesc/sesc-build-test2/obj/mipseb_obj
 #LIBS   := -lrt  -lm  -lpthread  
-app = combina_1
-LIBS   := -lm -lapp 
-
-combina_1:combina_1.c
+SRC_PATH = .
+SRCS = $(wildcard ${SRC_PATH}/*.c)
+OBJS = $(subst .c,.o,${SRCS})
+TARGET = $((subst .o,,$(OBJS))
+LIBS   := -lm -lapp
+all:${OBJS}
+$(OBJS):%.o:%.c
 	$(CC) -O2 -c $< $(CFLAGS) 
-#	echo $$(subst %.c,%.o,combina_01.c)
-	$(CC) $(LDFLAGS) combina_1.o  -o $@ $(LIBS)
-	cp combina_1 /home/sesc/sesc-build-test2/
-combina_1_1:combina_1_1.c
-	$(CC) -O2 -c $< $(CFLAGS) 
-#	echo $$(subst %.c,%.o,combina_01.c)
-	$(CC) $(LDFLAGS) combina_1_1.o  -o $@ $(LIBS)
-	cp combina_1_1 /home/sesc/sesc-build-test2/
+#	echo $(subst .c,.o,$(testsub))
+	echo $*
+	$(CC) $(LDFLAGS) $@  -o $* $(LIBS)
+#	cp combina_15 /home/sesc/sesc-build-test2/
 
-
-
-
-gensh:gensh.c
-	gcc $< -o $@
-	./gensh
-	chmod u+x run_combina.sh
-genMatlab:genMatlab.c
-	gcc $< -o $@
-	./genMatlab
-	
-testdfs_12:testdfs_12.c
-	gcc $< -o $@
-	cp testdfs_12 ./testfds2
-testdfs_12_op:testdfs_12_op.c
-	gcc $< -o $@
-	cp testdfs_12_op ./testfds2
-testdfs_11:testdfs_11.c
-	gcc $< -o $@
-	cp testdfs_11 ./testfds2
-testdfs_same:testdfs_same.c
-	gcc $< -o $@
-	cp testdfs_same ./testsame
 clean:
-		-@rm -f $(app)
+		-@rm -f $(SRCS)
 		-@rm -f *.o
+		-@rm -f combina_*
+
 

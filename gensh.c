@@ -12,7 +12,7 @@ int main()
 	char *str4 =  "echo \"************************combina_";
 
 	FILE * fp = fopen("run_combina.sh","w");
-	for(i = 1; i <= 100;i++){
+	for(i = 400; i <= 500;i++){
 		fprintf(fp,"%s",str1);
 		fprintf(fp,"%d",i);
 		fprintf(fp,"%s\n"," > output.txt");
